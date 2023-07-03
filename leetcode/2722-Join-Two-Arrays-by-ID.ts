@@ -1,0 +1,23 @@
+function join(arr1: any[], arr2: any[]): any[] {
+    const res = [];
+    let i = 0;
+    let j = 0;
+
+    arr1.sort((a, b) => a.id - b.id);
+    arr2.sort((a, b) => a.id - b.id);
+
+    while (i < arr1.length && j < arr2.length) {
+        if (arr1[i].id < arr2[j].id) {
+            res.push(arr1[i++]);
+        } else if (arr1[i].id === arr2[j].id) {
+            res.push({ ...arr1[i++], ...arr2[j++] });
+        } else {
+            res.push(arr2[j++]);
+        }
+    }
+
+    while (i < arr1.length) res.push(arr1[i++]);
+    while (j < arr2.length) res.push(arr2[j++]);
+
+    return res;
+};
